@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+</head>
+<body>
+    <h1>Order Confirmation</h1>
+    
+    <p>Your order has been placed successfully!</p>
+
+    <h2>Order ID: {{ order.id }}</h2>
+    <h3>Order Date: {{ order.created_at }}</h3>
+
+    <h4>Order Items:</h4>
+    <ul>
+        {% for item in order.items.all %}
+            <li>{{ item.quantity }} x {{ item.product.name }} - ${{ item.product.price }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'home' %}">Go back to shopping</a>
+</body>
+</html>
