@@ -57,10 +57,8 @@ def make_order(request):
     cart = request.session.get('cart', {})
 
     if cart:
-        # Create a new order
         order = Order.objects.create()
 
-        # Add each item in the cart to the order
         for product_id, item in cart.items():
             product = Product.objects.get(id=product_id)
             OrderItem.objects.create(
@@ -69,7 +67,6 @@ def make_order(request):
                 quantity=item['quantity']
             )
 
-        # Clear the cart
         request.session['cart'] = {}
 
         return render(request, 'main/order_confirmation.html', {'order': order})
